@@ -1,5 +1,5 @@
 <template>
-  <el-card class="e-main">
+  <div class="e-main">
     <div class="main">
       <div class="left">
         <p class="p-title">
@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-  </el-card>
+  </div>
 </template>
 
 <script>
