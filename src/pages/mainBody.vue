@@ -2,7 +2,7 @@
   <div id="body">
     <viewPager class="view-pager" />
     <imgWall class="img-wall" />
-    <chatRoom class="chat-room" />
+    <!-- <chatRoom class="chat-room" /> -->
   </div>
 </template>
 
