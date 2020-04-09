@@ -31,8 +31,26 @@
     </div>
     <!-- 登陆注册栏 -->
     <div class="d-lorr">
-      <el-menu class="t-el-menu" mode="horizontal" @select="mySelect">
-        <el-submenu index="0" v-if="user_nick!=null&&user_nick!=''" class="emi-user-img">
+      <!-- <el-button type ="text" v-if="user_nick!=null&&user_nick!=''">{{ user_nick }}</el-button> -->
+
+       <el-dropdown v-if="user_nick!=null&&user_nick!=''" @command="handleCommand">
+      <span class="el-dropdown-link">
+        {{ user_nick }}
+        <el-badge :value="newMsg"  class="item"></el-badge>
+        <i class="el-icon-arrow-down el-icon--right"></i>
+      </span>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item >我的主页</el-dropdown-item>
+        <el-dropdown-item >点赞通知</el-dropdown-item>
+        <el-dropdown-item command="/myMsg">
+          我的消息
+          <el-badge :value="newMsg"  class="item"></el-badge>
+        </el-dropdown-item>
+        <el-dropdown-item command="/logout">注销登陆</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
+      <!-- <el-menu class="t-el-menu" mode="vertical" @select="mySelect" v-if="user_nick!=null&&user_nick!=''">
+        <el-submenu index="0"  class="emi-user-img">
           <template slot="title">
             <el-badge :value="newMsg" class="item">
               <el-avatar :size="50">{{user_nick}}</el-avatar>
@@ -46,9 +64,9 @@
           </el-menu-item>
           <el-menu-item index="/logout">注销登陆</el-menu-item>
         </el-submenu>
-        <el-menu-item index="1" @click="login()" v-else>登陆</el-menu-item>
-        <el-menu-item index="2" @click="toRegister()">注册</el-menu-item>
-      </el-menu>
+      </el-menu> -->
+      <el-button @click="login()" v-else>登陆</el-button>
+      <el-button index="2" @click="toRegister()">注册</el-button>
     </div>
   </div>
 </template>
@@ -97,7 +115,7 @@ export default {
       this.$router.push("/my");
     },
     //我的信息下拉栏选择
-    mySelect(index){
+    handleCommand(index){
       switch(index){
         case "/myPage":
           break;
@@ -129,7 +147,7 @@ export default {
 };
 </script>
 
-<style>
+<style scope>
 #topbar {
   display: flex;
   height: 60px;
@@ -151,6 +169,7 @@ export default {
 .d-lorr {
   order: 3;
   flex-grow: 2;
+  padding-left: 20px;
 }
 .emi-user-img {
   margin: 5px;
